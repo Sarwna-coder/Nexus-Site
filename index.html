@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus | The Modern Discord Bot</title>
+    <meta name="description" content="The Modern Discord Bot Built for Communities. Lightweight, secure, and packed with AI, moderation, and economy features.">
+    <meta name="theme-color" content="#0b0b0b">
+    
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Interactive Background Particles -->
+    <canvas id="particles-canvas"></canvas>
+    
+    <!-- Background Gradient Glows -->
+    <div class="bg-glow glow-top-left"></div>
+    <div class="bg-glow glow-bottom-right"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">N</div>
+                <span class="logo-text">Nexus</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#why-nexus">Why Us</a>
+                <a href="#faq">FAQ</a>
+                <a href="changelog.html">Changelog</a>
+            </div>
+            <div class="nav-actions">
+                <a href="https://discord.com/oauth2/authorize?client_id=1529371684384276572&permissions=7882942643547223&integration_type=0&scope=bot+applications.commands" class="btn btn-primary btn-small" target="_blank" rel="noopener noreferrer">Invite Bot</a>
+                <button class="mobile-menu-btn" aria-label="Toggle menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu">
+        <a href="#features">Features</a>
+        <a href="#why-nexus">Why Us</a>
+        <a href="#faq">FAQ</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="https://discord.com/oauth2/authorize?client_id=1529371684384276572&permissions=7882942643547223&integration_type=0&scope=bot+applications.commands" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Invite Bot</a>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero" id="home">
+        <div class="hero-content reveal">
+            <div class="badge">✨ Nexus v2.0 is now live</div>
+            <h1 class="hero-title">The Modern Discord Bot<br><span class="text-gradient">Built for Communities.</span></h1>
+            <p class="hero-description">
+                Elevate your server with next-generation AI moderation, powerful utilities, and an engaging economy system. Setup takes seconds.
+            </p>
+            <div class="hero-buttons">
+                <a href="https://discord.com/oauth2/authorize?client_id=1529371684384276572&permissions=7882942643547223&integration_type=0&scope=bot+applications.commands" class="btn btn-primary btn-large" target="_blank" rel="noopener noreferrer">
+                    <svg class="discord-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.14 96.36" width="24" height="24" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-19.32-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.31,60,73.31,53s5-12.74,11.43-12.74S96.33,46,96.22,53,91.08,65.69,84.69,65.69Z"/></svg>
+                    Invite to Server
+                </a>
+                <a href="#" class="btn btn-secondary btn-large">Support Server</a>
+                <a href="#" class="btn btn-outline btn-icon" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Statistics Section -->
+    <section class="stats" id="statistics">
+        <div class="stats-container reveal">
+            <div class="stat-card glass">
+                <h3 class="stat-number" data-target="15000">0</h3>
+                <p class="stat-label">Servers</p>
+            </div>
+            <div class="stat-card glass">
+                <h3 class="stat-number" data-target="2500000">0</h3>
+                <p class="stat-label">Users</p>
+            </div>
+            <div class="stat-card glass">
+                <h3 class="stat-number" data-target="120">0</h3>
+                <p class="stat-label">Commands</p>
+            </div>
+            <div class="stat-card glass">
+                <h3 class="stat-number" data-target="99.9">0</h3>
+                <p class="stat-label">Uptime %</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header reveal">
+            <h2>Everything you need. <span class="text-gradient">And more.</span></h2>
+            <p>Nexus replaces multiple bots with one seamless, unified experience.</p>
+        </div>
+        
+        <div class="features-grid container">
+            <!-- Feature 1 -->
+            <div class="feature-card glass reveal">
+                <div class="feature-icon bg-blue">🧠</div>
+                <h3>AI Chat</h3>
+                <p>Advanced natural language processing for engaging conversations and intelligent automated responses.</p>
+            </div>
+            <!-- Feature 2 -->
+            <div class="feature-card glass reveal delay-1">
+                <div class="feature-icon bg-purple">🛡️</div>
+                <h3>Moderation</h3>
+                <p>Keep your community safe with powerful automod filters, logging, and intuitive staff tools.</p>
+            </div>
+            <!-- Feature 3 -->
+            <div class="feature-card glass reveal delay-2">
+                <div class="feature-icon bg-blue">🎫</div>
+                <h3>Tickets</h3>
+                <p>Beautiful HTML transcripts, claim systems, and category-based routing for your support team.</p>
+            </div>
+            <!-- Feature 4 -->
+            <div class="feature-card glass reveal">
+                <div class="feature-icon bg-purple">🎁</div>
+                <h3>Giveaways</h3>
+                <p>Host exciting events with requirements, multipliers, and automated winner selection.</p>
+            </div>
+            <!-- Feature 5 -->
+            <div class="feature-card glass reveal delay-1">
+                <div class="feature-icon bg-blue">💰</div>
+                <h3>Economy</h3>
+                <p>A global or server-specific economy system with shops, trading, and leaderboards.</p>
+            </div>
+            <!-- Feature 6 -->
+            <div class="feature-card glass reveal delay-2">
+                <div class="feature-icon bg-purple">⚙️</div>
+                <h3>Utility</h3>
+                <p>Essential tools including reminders, polls, timezone converters, and server statistics.</p>
+            </div>
+            <!-- Feature 7 -->
+            <div class="feature-card glass reveal">
+                <div class="feature-icon bg-blue">🎮</div>
+                <h3>Games</h3>
+                <p>Keep your members engaged with interactive minigames, trivia, and RPG elements.</p>
+            </div>
+            <!-- Feature 8 -->
+            <div class="feature-card glass reveal delay-1">
+                <div class="feature-icon bg-purple">✨</div>
+                <h3>Custom Embeds</h3>
+                <p>Create stunning announcements with our intuitive in-server embed builder.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Nexus Section -->
+    <section class="why-nexus" id="why-nexus">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Why choose <span class="text-gradient">Nexus?</span></h2>
+            </div>
+            <div class="why-grid">
+                <div class="why-item reveal">
+                    <h4>⚡ Lightweight & Fast</h4>
+                    <p>Optimized architecture ensures instant command responses with zero latency.</p>
+                </div>
+                <div class="why-item reveal delay-1">
+                    <h4>🔒 Secure by Design</h4>
+                    <p>Your server data is encrypted and handled strictly according to Discord's TOS.</p>
+                </div>
+                <div class="why-item reveal delay-2">
+                    <h4>🎨 Modern UI</h4>
+                    <p>Beautifully formatted embeds, buttons, and dropdown menus for superior UX.</p>
+                </div>
+                <div class="why-item reveal">
+                    <h4>🚀 Easy Setup</h4>
+                    <p>Get started in under 60 seconds with our interactive configuration wizard.</p>
+                </div>
+                <div class="why-item reveal delay-1">
+                    <h4>🔄 Regular Updates</h4>
+                    <p>Frequent feature drops and bug fixes driven by community feedback.</p>
+                </div>
+                <div class="why-item reveal delay-2">
+                    <h4>🌐 24/7 Hosting</h4>
+                    <p>Enterprise-grade infrastructure guaranteeing 99.9% reliable uptime.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Gallery -->
+    <section class="gallery" id="gallery">
+        <div class="section-header reveal">
+            <h2>See Nexus in <span class="text-gradient">Action</span></h2>
+        </div>
+        <div class="gallery-container container reveal">
+            <div class="screenshot glass">
+                <div class="mockup-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <div class="mockup-body">
+                    <div class="discord-message">
+                        <div class="avatar bg-gradient">N</div>
+                        <div class="msg-content">
+                            <span class="username">Nexus <span class="bot-tag">APP</span></span>
+                            <div class="embed embed-blue">
+                                <strong>Welcome to the Server!</strong>
+                                <p>Please read the rules in #rules and grab your roles in #roles. Enjoy your stay!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="screenshot glass">
+                <div class="mockup-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <div class="mockup-body">
+                    <div class="discord-message">
+                        <div class="avatar bg-gradient">N</div>
+                        <div class="msg-content">
+                            <span class="username">Nexus <span class="bot-tag">APP</span></span>
+                            <div class="embed embed-purple">
+                                <strong>Ticket Created</strong>
+                                <p>Support will be with you shortly. Click the button below to close this ticket.</p>
+                                <div class="discord-buttons">
+                                    <button class="d-btn d-btn-danger">🔒 Close Ticket</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="section-header reveal">
+            <h2>Frequently Asked <span class="text-gradient">Questions</span></h2>
+        </div>
+        <div class="faq-container container reveal">
+            <div class="faq-item glass">
+                <button class="faq-question">
+                    Is Nexus completely free to use?
+                    <span class="icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Yes! All core features including moderation, economy, and basic utilities are 100% free. We also offer a premium tier for advanced AI limits and custom branding.</p>
+                </div>
+            </div>
+            <div class="faq-item glass">
+                <button class="faq-question">
+                    How do I set up the moderation system?
+                    <span class="icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Simply run the `/setup automod` command in your server, and our interactive wizard will guide you through configuring filters, strike thresholds, and log channels.</p>
+                </div>
+            </div>
+            <div class="faq-item glass">
+                <button class="faq-question">
+                    What permissions does Nexus need?
+                    <span class="icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Nexus requests standard permissions like Send Messages, Manage Roles, and Kick/Ban Members. You can customize these permissions during the invite process.</p>
+                </div>
+            </div>
+            <div class="faq-item glass">
+                <button class="faq-question">
+                    Can I change the bot's prefix?
+                    <span class="icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Nexus is built entirely on modern Slash Commands (/). This means you don't need to remember prefixes, and commands are instantly accessible by typing `/`.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback Section -->
+    <section class="feedback" id="feedback">
+        <div class="container glass feedback-card reveal">
+            <div class="feedback-content">
+                <h2>Leave us a <span class="text-gradient">Review</span></h2>
+                <p>Help us improve Nexus by sharing your experience.</p>
+            </div>
+            <form id="feedback-form" class="feedback-form">
+                <div class="form-group">
+                    <input type="text" id="name" required placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="discord" required placeholder="Discord Username (e.g. user#1234)">
+                </div>
+                <div class="form-group rating">
+                    <span>Rate Nexus: </span>
+                    <div class="stars" id="star-rating">
+                        <span data-value="1">★</span>
+                        <span data-value="2">★</span>
+                        <span data-value="3">★</span>
+                        <span data-value="4">★</span>
+                        <span data-value="5">★</span>
+                    </div>
+                    <input type="hidden" id="rating-value" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" required placeholder="What do you think about Nexus?" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Submit Feedback</button>
+                <div id="form-success" class="form-success hidden">
+                    Thank you! Your feedback has been submitted successfully.
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container container">
+            <div class="footer-brand">
+                <div class="logo">
+                    <div class="logo-icon">N</div>
+                    <span class="logo-text">Nexus</span>
+                </div>
+                <p>The modern, reliable, and feature-rich Discord bot built for communities of all sizes.</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>Nexus</h4>
+                    <a href="https://discord.com/oauth2/authorize?client_id=1529371684384276572&permissions=7882942643547223&integration_type=0&scope=bot+applications.commands" target="_blank" rel="noopener noreferrer">Invite Bot</a>
+                    <a href="#">Support Server</a>
+                    <a href="changelog.html">Changelog</a>
+                </div>
+                <div class="link-group">
+                    <h4>Legal</h4>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>&copy; 2026 Nexus Bot. All rights reserved. Not affiliated with Discord Inc.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/script.js"></script>
+</body>
+</html>
