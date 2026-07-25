@@ -12,8 +12,233 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Inline CSS for GitHub Pages Compatibility & Polish -->
+    <style>
+        /* ==========================================================================
+           CSS Variables & Theme Setup
+           ========================================================================== */
+        :root {
+            /* Colors */
+            --bg-dark: #0b0b0b;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            
+            /* Accents */
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-gradient: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            
+            /* Discord specific */
+            --discord-blurple: #5865F2;
+            --discord-dark: #36393f;
+            --discord-embed-bg: #2f3136;
+            
+            /* Typography */
+            --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            
+            /* Layout */
+            --container-width: 1200px;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ==========================================================================
+           Reset & Base Styles
+           ========================================================================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body { font-family: var(--font-main); background-color: var(--bg-dark); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; position: relative; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); }
+
+        /* Background Effects */
+        #particles-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; }
+        .bg-glow { position: fixed; width: 600px; height: 600px; background: var(--accent-gradient); filter: blur(150px); opacity: 0.15; border-radius: 50%; z-index: -1; pointer-events: none; }
+        .glow-top-left { top: -200px; left: -200px; }
+        .glow-bottom-right { bottom: -200px; right: -200px; background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue)); }
+
+        /* Typography Utilities */
+        h1, h2, h3, h4, h5, h6 { line-height: 1.2; font-weight: 700; }
+        .text-gradient { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        a { color: inherit; text-decoration: none; transition: var(--transition); }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 24px; }
+
+        /* ==========================================================================
+           UI Components
+           ========================================================================== */
+        .glass { background: var(--bg-card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border-color); border-radius: var(--radius-md); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); }
+        
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-weight: 600; border-radius: var(--radius-sm); cursor: pointer; transition: var(--transition); border: none; outline: none; padding: 12px 24px; font-size: 1rem; }
+        .btn-primary { background: var(--accent-gradient); color: white; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.25); }
+        .btn-primary:hover { box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4); transform: translateY(-2px); }
+        .btn-secondary { background: var(--bg-card); color: white; border: 1px solid var(--border-color); }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.08); transform: translateY(-2px); }
+        .btn-outline { background: transparent; border: 1px solid var(--border-color); color: var(--text-secondary); }
+        .btn-outline:hover { color: white; border-color: white; transform: translateY(-2px); }
+        .btn-small { padding: 8px 16px; font-size: 0.875rem; }
+        .btn-large { padding: 16px 32px; font-size: 1.125rem; }
+        .btn-icon { padding: 12px; border-radius: var(--radius-sm); }
+        
+        .badge { display: inline-block; padding: 6px 16px; background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); color: var(--accent-blue); border-radius: 50px; font-size: 0.875rem; font-weight: 600; margin-bottom: 24px; letter-spacing: 0.5px; }
+
+        /* Images */
+        img.logo-icon { width: 36px; height: 36px; border-radius: 8px; object-fit: cover; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        img.avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+
+        /* ==========================================================================
+           Navigation
+           ========================================================================== */
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; transition: var(--transition); border-bottom: 1px solid transparent; }
+        .navbar.scrolled { background: rgba(11, 11, 11, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-color); }
+        .nav-container { max-width: var(--container-width); margin: 0 auto; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 12px; font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px; }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a { color: var(--text-secondary); font-weight: 500; }
+        .nav-links a:hover { color: white; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+        .mobile-menu-btn { display: none; background: none; border: none; color: white; cursor: pointer; padding: 8px; }
+
+        /* Mobile Menu Polish */
+        .mobile-menu { display: flex; position: fixed; top: -100%; left: 0; width: 100%; height: 100vh; background: rgba(11, 11, 11, 0.98); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); flex-direction: column; justify-content: center; align-items: center; gap: 32px; z-index: 999; transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1); opacity: 0; }
+        .mobile-menu.active { top: 0; opacity: 1; }
+        .mobile-menu a { font-size: 1.5rem; font-weight: 600; color: var(--text-secondary); letter-spacing: 1px; }
+        .mobile-menu a:hover { color: white; }
+        .mobile-menu .btn { font-size: 1.2rem; margin-top: 16px; padding: 16px 40px; }
+
+        /* ==========================================================================
+           Hero Section
+           ========================================================================== */
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 120px 24px 60px; }
+        .hero-content { max-width: 800px; }
+        .hero-title { font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 24px; letter-spacing: -1px; }
+        .hero-description { font-size: clamp(1rem, 2vw, 1.25rem); color: var(--text-secondary); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+        /* ==========================================================================
+           Features Section
+           ========================================================================== */
+        .section-header { text-align: center; margin-bottom: 60px; padding: 0 24px; }
+        .section-header h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px; }
+        .section-header p { color: var(--text-secondary); font-size: 1.125rem; max-width: 600px; margin: 0 auto; }
+        .features { padding: 100px 0; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .feature-card { padding: 32px; transition: var(--transition); border: 1px solid rgba(255,255,255,0.05); }
+        .feature-card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.05); border-color: rgba(255,255,255,0.1); }
+        .feature-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 24px; }
+        .bg-blue { background: rgba(59, 130, 246, 0.1); color: var(--accent-blue); }
+        .bg-purple { background: rgba(139, 92, 246, 0.1); color: var(--accent-purple); }
+        .feature-card h3 { margin-bottom: 12px; font-size: 1.25rem; }
+        .feature-card p { color: var(--text-secondary); font-size: 0.95rem; }
+
+        /* ==========================================================================
+           Why Nexus
+           ========================================================================== */
+        .why-nexus { padding: 100px 0; background: linear-gradient(180deg, transparent, rgba(255,255,255,0.02), transparent); }
+        .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+        .why-item { border-left: 2px solid var(--border-color); padding-left: 24px; transition: var(--transition); }
+        .why-item:hover { border-left-color: var(--accent-blue); }
+        .why-item h4 { font-size: 1.2rem; margin-bottom: 12px; color: white; }
+        .why-item p { color: var(--text-secondary); }
+
+        /* ==========================================================================
+           Mockup / Gallery Section
+           ========================================================================== */
+        .gallery { padding: 100px 0; }
+        .gallery-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 32px; }
+        .screenshot { overflow: hidden; border-radius: var(--radius-md); border: 1px solid var(--border-color); }
+        .mockup-header { background: rgba(0,0,0,0.5); padding: 12px 16px; display: flex; gap: 8px; border-bottom: 1px solid var(--border-color); }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot.red { background: #ff5f56; } .dot.yellow { background: #ffbd2e; } .dot.green { background: #27c93f; }
+        .mockup-body { padding: 24px; background: rgba(54, 57, 63, 0.4); }
+        
+        .discord-message { display: flex; gap: 16px; font-family: 'Whitney', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+        .msg-content { flex: 1; }
+        .username { font-weight: 600; color: white; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+        .bot-tag { background: var(--discord-blurple); color: white; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; }
+        .embed { background: var(--discord-embed-bg); border-left: 4px solid; padding: 16px; border-radius: 4px; margin-top: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .embed-blue { border-left-color: var(--accent-blue); }
+        .embed-purple { border-left-color: var(--accent-purple); }
+        .embed strong { display: block; margin-bottom: 8px; color: white; }
+        .embed p { color: #dcddde; font-size: 0.9rem; }
+        .discord-buttons { margin-top: 12px; display: flex; gap: 8px; }
+        .d-btn { background: #4f545c; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: 500; transition: background 0.2s; }
+        .d-btn:hover { background: #5d6269; }
+        .d-btn-danger { background: #ed4245; }
+        .d-btn-danger:hover { background: #c9383b; }
+
+        /* ==========================================================================
+           FAQ Section
+           ========================================================================== */
+        .faq { padding: 100px 0; }
+        .faq-container { max-width: 800px; display: flex; flex-direction: column; gap: 16px; margin: 0 auto; }
+        .faq-item { overflow: hidden; border: 1px solid var(--border-color); }
+        .faq-question { width: 100%; text-align: left; background: none; border: none; color: white; padding: 24px; font-size: 1.1rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: inherit; }
+        .faq-question .icon { font-size: 1.5rem; transition: transform 0.3s ease; color: var(--accent-blue); }
+        .faq-item.active .faq-question .icon { transform: rotate(45deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+        .faq-answer p { padding: 0 24px 24px; color: var(--text-secondary); }
+
+        /* ==========================================================================
+           Feedback Section
+           ========================================================================== */
+        .feedback { padding: 100px 0; }
+        .feedback-card { max-width: 600px; padding: 40px; margin: 0 auto; }
+        .feedback-content { text-align: center; margin-bottom: 32px; }
+        .feedback-form { display: flex; flex-direction: column; gap: 20px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 16px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: white; font-family: inherit; outline: none; transition: var(--transition); }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--accent-blue); background: rgba(0,0,0,0.5); box-shadow: 0 0 10px rgba(59, 130, 246, 0.1); }
+        .w-100 { width: 100%; }
+        .rating { display: flex; align-items: center; gap: 16px; color: var(--text-secondary); }
+        .stars { display: flex; gap: 4px; font-size: 1.5rem; cursor: pointer; color: var(--border-color); }
+        .stars span:hover, .stars span.active { color: #fbbf24; }
+        .form-success { background: rgba(39, 201, 63, 0.1); color: #27c93f; padding: 16px; border-radius: var(--radius-sm); text-align: center; border: 1px solid rgba(39, 201, 63, 0.2); }
+        .hidden { display: none; }
+
+        /* ==========================================================================
+           Footer
+           ========================================================================== */
+        .footer { border-top: 1px solid var(--border-color); padding: 60px 0 24px; background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
+        .footer-container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-bottom: 40px; }
+        .footer-brand { max-width: 300px; }
+        .footer-brand p { color: var(--text-secondary); margin-top: 16px; font-size: 0.95rem; }
+        .footer-links { display: flex; gap: 60px; flex-wrap: wrap; }
+        .link-group h4 { margin-bottom: 16px; color: white; font-weight: 600; }
+        .link-group a { display: block; color: var(--text-secondary); margin-bottom: 12px; font-size: 0.95rem; transition: var(--transition); }
+        .link-group a:hover { color: var(--accent-blue); padding-left: 4px; }
+        .footer-bottom { text-align: center; color: var(--text-secondary); font-size: 0.875rem; border-top: 1px solid var(--border-color); padding-top: 24px; }
+
+        /* ==========================================================================
+           Animations
+           ========================================================================== */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+
+        /* ==========================================================================
+           Responsive Design (Mobile Polish)
+           ========================================================================== */
+        @media (max-width: 768px) {
+            .nav-links, .nav-actions .btn { display: none; }
+            .mobile-menu-btn { display: block; }
+            .hero { padding-top: 140px; }
+            .hero-title { font-size: 2.2rem; }
+            .hero-buttons { flex-direction: column; width: 100%; max-width: 320px; margin: 0 auto; }
+            .hero-buttons .btn { width: 100%; justify-content: center; }
+            .footer-container { flex-direction: column; gap: 32px; }
+            .footer-links { gap: 40px; }
+            .gallery-container { grid-template-columns: 1fr; }
+            .why-grid { grid-template-columns: 1fr; }
+            .badge { margin-bottom: 16px; }
+        }
+    </style>
 </head>
 <body>
     <!-- Interactive Background Particles -->
@@ -27,19 +252,18 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
-                <div class="logo-icon">N</div>
+                <img src="1000145335.jpg" alt="Nexus Logo" class="logo-icon">
                 <span class="logo-text">Nexus</span>
             </a>
             <div class="nav-links">
                 <a href="#features">Features</a>
                 <a href="#why-nexus">Why Us</a>
                 <a href="#faq">FAQ</a>
-                <a href="changelog.html">Changelog</a>
             </div>
             <div class="nav-actions">
                 <a href="https://discord.com/oauth2/authorize?client_id=1529371684384276572&permissions=7882942643547223&integration_type=0&scope=bot+applications.commands" class="btn btn-primary btn-small" target="_blank" rel="noopener noreferrer">Invite Bot</a>
                 <button class="mobile-menu-btn" aria-label="Toggle menu">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
                 </button>
             </div>
         </div>
@@ -47,10 +271,13 @@
 
     <!-- Mobile Menu Overlay -->
     <div class="mobile-menu">
+        <button class="mobile-menu-btn" style="position: absolute; top: 24px; right: 24px;" aria-label="Close menu">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
         <a href="#features">Features</a>
         <a href="#why-nexus">Why Us</a>
+        <a href="#gallery">Gallery</a>
         <a href="#faq">FAQ</a>
-        <a href="changelog.html">Changelog</a>
         <a href="https://discord.com/oauth2/authorize?client_id=1529371684384276572&permissions=7882942643547223&integration_type=0&scope=bot+applications.commands" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Invite Bot</a>
     </div>
 
@@ -67,28 +294,19 @@
                     <svg class="discord-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.14 96.36" width="24" height="24" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-19.32-72.15ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.31,60,73.31,53s5-12.74,11.43-12.74S96.33,46,96.22,53,91.08,65.69,84.69,65.69Z"/></svg>
                     Invite to Server
                 </a>
-                <a href="https://discord.gg/Rcdmyb9Jn" class="btn btn-secondary btn-large">Support Server</a>
-                <a href="#" class="btn btn-outline btn-icon" aria-label="GitHub">
-                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                <a href="#" class="btn btn-secondary btn-large">Support Server</a>
+                
+                <!-- Replaced GitHub with Top.gg Icon Link -->
+                <a href="https://top.gg" class="btn btn-outline btn-icon" aria-label="Vote on Top.gg" target="_blank" rel="noopener noreferrer" title="Vote on Top.gg">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
                 </a>
             </div>
         </div>
     </header>
-
-    <!-- Statistics Section -->
-<section class="stats" id="statistics">
-    <div class="stats-container reveal">
-        <div class="stat-card glass">
-            <h3 class="stat-number" data-target="52">0</h3>
-            <p class="stat-label">Commands</p>
-        </div>
-
-        <div class="stat-card glass">
-            <h3 class="stat-number" data-target="99.9">0</h3>
-            <p class="stat-label">Uptime %</p>
-        </div>
-    </div>
-</section>
 
     <!-- Features Section -->
     <section class="features" id="features">
@@ -98,53 +316,35 @@
         </div>
         
         <div class="features-grid container">
-            <!-- Feature 1 -->
             <div class="feature-card glass reveal">
                 <div class="feature-icon bg-blue">🧠</div>
                 <h3>AI Chat</h3>
                 <p>Advanced natural language processing for engaging conversations and intelligent automated responses.</p>
             </div>
-            <!-- Feature 2 -->
             <div class="feature-card glass reveal delay-1">
                 <div class="feature-icon bg-purple">🛡️</div>
                 <h3>Moderation</h3>
                 <p>Keep your community safe with powerful automod filters, logging, and intuitive staff tools.</p>
             </div>
-            <!-- Feature 3 -->
             <div class="feature-card glass reveal delay-2">
                 <div class="feature-icon bg-blue">🎫</div>
                 <h3>Tickets</h3>
                 <p>Beautiful HTML transcripts, claim systems, and category-based routing for your support team.</p>
             </div>
-            <!-- Feature 4 -->
             <div class="feature-card glass reveal">
                 <div class="feature-icon bg-purple">🎁</div>
                 <h3>Giveaways</h3>
                 <p>Host exciting events with requirements, multipliers, and automated winner selection.</p>
             </div>
-            <!-- Feature 5 -->
             <div class="feature-card glass reveal delay-1">
                 <div class="feature-icon bg-blue">💰</div>
                 <h3>Economy</h3>
                 <p>A global or server-specific economy system with shops, trading, and leaderboards.</p>
             </div>
-            <!-- Feature 6 -->
             <div class="feature-card glass reveal delay-2">
                 <div class="feature-icon bg-purple">⚙️</div>
                 <h3>Utility</h3>
                 <p>Essential tools including reminders, polls, timezone converters, and server statistics.</p>
-            </div>
-            <!-- Feature 7 -->
-            <div class="feature-card glass reveal">
-                <div class="feature-icon bg-blue">🎮</div>
-                <h3>Games</h3>
-                <p>Keep your members engaged with interactive minigames, trivia, and RPG elements.</p>
-            </div>
-            <!-- Feature 8 -->
-            <div class="feature-card glass reveal delay-1">
-                <div class="feature-icon bg-purple">✨</div>
-                <h3>Custom Embeds</h3>
-                <p>Create stunning announcements with our intuitive in-server embed builder.</p>
             </div>
         </div>
     </section>
@@ -198,7 +398,8 @@
                 </div>
                 <div class="mockup-body">
                     <div class="discord-message">
-                        <div class="avatar bg-gradient">N</div>
+                        <!-- Updated avatar to use 1000145335.jpg -->
+                        <img src="1000145335.jpg" alt="Nexus" class="avatar">
                         <div class="msg-content">
                             <span class="username">Nexus <span class="bot-tag">APP</span></span>
                             <div class="embed embed-blue">
@@ -218,7 +419,8 @@
                 </div>
                 <div class="mockup-body">
                     <div class="discord-message">
-                        <div class="avatar bg-gradient">N</div>
+                        <!-- Updated avatar to use 1000145335.jpg -->
+                        <img src="1000145335.jpg" alt="Nexus" class="avatar">
                         <div class="msg-content">
                             <span class="username">Nexus <span class="bot-tag">APP</span></span>
                             <div class="embed embed-purple">
@@ -321,7 +523,8 @@
         <div class="footer-container container">
             <div class="footer-brand">
                 <div class="logo">
-                    <div class="logo-icon">N</div>
+                    <!-- Updated Footer Logo -->
+                    <img src="1000145335.jpg" alt="Nexus Logo" class="logo-icon">
                     <span class="logo-text">Nexus</span>
                 </div>
                 <p>The modern, reliable, and feature-rich Discord bot built for communities of all sizes.</p>
@@ -330,13 +533,13 @@
                 <div class="link-group">
                     <h4>Nexus</h4>
                     <a href="https://discord.com/oauth2/authorize?client_id=1529371684384276572&permissions=7882942643547223&integration_type=0&scope=bot+applications.commands" target="_blank" rel="noopener noreferrer">Invite Bot</a>
+                    <a href="https://top.gg" target="_blank" rel="noopener noreferrer">Top.gg Vote</a>
                     <a href="#">Support Server</a>
-                    <a href="changelog.html">Changelog</a>
                 </div>
                 <div class="link-group">
                     <h4>Legal</h4>
-                    <a href="privacy.html">Privacy Policy</a>
-                    <a href="terms.html">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
                 </div>
             </div>
         </div>
@@ -345,7 +548,178 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="script.js"></script>
+    <!-- Inline JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. Navbar Scroll Effect ---
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) navbar.classList.add('scrolled');
+                else navbar.classList.remove('scrolled');
+            });
+
+            // --- 2. Mobile Menu Toggle ---
+            const menuBtns = document.querySelectorAll('.mobile-menu-btn');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (menuBtns && mobileMenu) {
+                menuBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        mobileMenu.classList.toggle('active');
+                    });
+                });
+                
+                const mobileLinks = mobileMenu.querySelectorAll('a');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.remove('active');
+                    });
+                });
+            }
+
+            // --- 3. Scroll Reveal Animations ---
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // --- 4. FAQ Accordion ---
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    
+                    faqItems.forEach(faq => {
+                        faq.classList.remove('active');
+                        faq.querySelector('.faq-answer').style.maxHeight = null;
+                    });
+
+                    if (!isActive) {
+                        item.classList.add('active');
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                    }
+                });
+            });
+
+            // --- 5. Feedback Form & Star Rating ---
+            const stars = document.querySelectorAll('.stars span');
+            const ratingInput = document.getElementById('rating-value');
+            const feedbackForm = document.getElementById('feedback-form');
+            const formSuccess = document.getElementById('form-success');
+
+            if (stars.length > 0) {
+                stars.forEach(star => {
+                    star.addEventListener('click', (e) => {
+                        const value = e.target.getAttribute('data-value');
+                        ratingInput.value = value;
+                        stars.forEach(s => {
+                            if (s.getAttribute('data-value') <= value) s.classList.add('active');
+                            else s.classList.remove('active');
+                        });
+                    });
+                });
+            }
+
+            if (feedbackForm) {
+                feedbackForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    if (!ratingInput.value) return alert("Please select a star rating!");
+                    
+                    const submitBtn = feedbackForm.querySelector('button[type="submit"]');
+                    submitBtn.innerText = 'Sending...';
+                    submitBtn.disabled = true;
+
+                    setTimeout(() => {
+                        feedbackForm.reset();
+                        stars.forEach(s => s.classList.remove('active'));
+                        ratingInput.value = '';
+                        submitBtn.style.display = 'none';
+                        formSuccess.classList.remove('hidden');
+                    }, 1000);
+                });
+            }
+
+            // --- 6. Interactive Floating Particles ---
+            const canvas = document.getElementById('particles-canvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                let particles = [];
+                let width = canvas.width = window.innerWidth;
+                let height = canvas.height = window.innerHeight;
+
+                window.addEventListener('resize', () => {
+                    width = canvas.width = window.innerWidth;
+                    height = canvas.height = window.innerHeight;
+                    initParticles();
+                });
+
+                class Particle {
+                    constructor() {
+                        this.x = Math.random() * width;
+                        this.y = Math.random() * height;
+                        this.size = Math.random() * 2;
+                        this.speedX = Math.random() * 0.5 - 0.25;
+                        this.speedY = Math.random() * 0.5 - 0.25;
+                    }
+                    update() {
+                        this.x += this.speedX;
+                        this.y += this.speedY;
+                        if (this.x > width) this.x = 0;
+                        if (this.x < 0) this.x = width;
+                        if (this.y > height) this.y = 0;
+                        if (this.y < 0) this.y = height;
+                    }
+                    draw() {
+                        ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+
+                function initParticles() {
+                    particles = [];
+                    const particleCount = window.innerWidth < 768 ? 30 : 60;
+                    for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+                }
+
+                function animateParticles() {
+                    ctx.clearRect(0, 0, width, height);
+                    for (let i = 0; i < particles.length; i++) {
+                        particles[i].update();
+                        particles[i].draw();
+                        for (let j = i; j < particles.length; j++) {
+                            const dx = particles[i].x - particles[j].x;
+                            const dy = particles[i].y - particles[j].y;
+                            const distance = Math.sqrt(dx * dx + dy * dy);
+                            if (distance < 120) {
+                                ctx.beginPath();
+                                ctx.strokeStyle = `rgba(139, 92, 246, ${0.12 - distance/1000})`;
+                                ctx.lineWidth = 0.5;
+                                ctx.moveTo(particles[i].x, particles[i].y);
+                                ctx.lineTo(particles[j].x, particles[j].y);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+                    requestAnimationFrame(animateParticles);
+                }
+
+                initParticles();
+                animateParticles();
+            }
+        });
+    </script>
 </body>
 </html>
